@@ -1,11 +1,13 @@
-const CACHE_NAME = 'ahorros-familiar-v1';
+// Service worker for PWA functionality
+const CACHE_NAME = 'ahorros-familiares-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/manifest.json'
+  '/manifest.json',
+  // Assets will be cached dynamically
 ];
 
-// Install the service worker
+// Install event - cache core resources
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -13,22 +15,35 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Cache and return requests
+// Fetch event - serve from cache, fallback to network
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
-        // Cache hit - return response
+        // Return cached response if found
         if (response) {
           return response;
         }
-        return fetch(event.request);
-      }
-    )
+        // Otherwise fetch from network
+        return fetch(event.request)
+          .then((response) => {
+            // Check if we received a valid response
+            if(!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+            // Clone the response
+            const responseToCache = response.clone();
+            caches.open(CACHE_NAME)
+              .then((cache) => {
+                cache.put(event.request, responseToCache);
+              });
+            return response;
+          });
+      })
   );
 });
 
-// Update a service worker
+// Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
