@@ -5,9 +5,9 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ahorros Familiares</title>
-    <link rel="manifest" href="/manifest.json" />
-    <script type="module" crossorigin src="/assets/index-F_mopOAz.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CJu4O_Ty.css">
+    <link rel="manifest" href="/test-repo/manifest.json" />
+    <script type="module" crossorigin src="/test-repo/assets/index-C1X2a8rl.js"></script>
+    <link rel="stylesheet" crossorigin href="/test-repo/assets/index-uVMcb4T6.css">
   </head>
   <body>
     <div id="root"></div>
@@ -15,7 +15,10 @@
       // Register service worker if supported
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
+          // Calculate correct SW path based on current location
+          const swUrl = new URL('./sw.js', window.location.href).toString();
+          
+          navigator.serviceWorker.register(swUrl)
             .then((registration) => {
               console.log('SW registered: ', registration);
             })
