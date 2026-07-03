@@ -1,0 +1,882 @@
+/*
+ * Simple CSS for the Ahorros Familiares app
+ * With CSS Variables for Light/Dark themes
+ */
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* CSS Variables - Light Theme (default) */
+:root {
+  --background: #ffffff;
+  --surface: #f5f5f5;
+  --border: #ddd;
+  --text: #333;
+  --text-h: #222;
+  --text-light: #777;
+  --accent: #667eea;
+  --accent-bg: rgba(102, 126, 234, 0.1);
+  --accent-border: #5a67d8;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* CSS Variables - Dark Theme */
+[data-theme="dark"] {
+  --background: #121212;
+  --surface: #1e1e1e;
+  --border: #333;
+  --text: #f0f0f0;
+  --text-h: #ffffff;
+  --text-light: #aaa;
+  --accent: #667eea;
+  --accent-bg: rgba(102, 126, 234, 0.2);
+  --accent-border: #5a67d8;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* CSS Variables - Auto Theme (follows system) */
+[data-theme="auto"] {
+  --background: #ffffff;
+  --surface: #f5f5f5;
+  --border: #ddd;
+  --text: #333;
+  --text-h: #222;
+  --text-light: #777;
+  --accent: #667eea;
+  --accent-bg: rgba(102, 126, 234, 0.1);
+  --accent-border: #5a67d8;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Apply auto theme based on system preference */
+@media (prefers-color-scheme: dark) {
+  [data-theme="auto"] {
+    --background: #121212;
+    --surface: #1e1e1e;
+    --border: #333;
+    --text: #f0f0f0;
+    --text-h: #ffffff;
+    --text-light: #aaa;
+    --accent: #667eea;
+    --accent-bg: rgba(102, 126, 234, 0.2);
+    --accent-border: #5a67d8;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Rest of the styles remain the same but use variables */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* App layout */
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.app-header {
+  background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+.app-header h1 {
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+}
+
+.app-header p {
+  opacity: 0.9;
+  font-size: 1.1rem;
+}
+
+/* Login form */
+.login-container {
+  background: var(--surface);
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto;
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--text-h);
+}
+
+.login-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.login-container button:hover {
+  transform: translateY(-2px);
+}
+
+.login-container button:active {
+  transform: translateY(0);
+}
+
+.error {
+  background: #ffebee;
+  color: #c62828;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Dark mode adjustments for error */
+[data-theme="dark"] .error {
+  background: #4a1414;
+  color: #ff8a80;
+  border-left-color: #ff5252;
+}
+
+/* Dashboard */
+.dashboard {
+  flex: 1;
+  display: flex;
+}
+
+.navbar {
+  width: 250px;
+  background: #2c3e50;
+  color: white;
+  padding: 2rem;
+}
+
+/* Dark mode for navbar */
+[data-theme="dark"] .navbar {
+  background: #1a252f;
+}
+
+.navbar h2 {
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.navbar button {
+  width: 100%;
+  padding: 1rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.navbar button:hover {
+  background: #c0392b;
+}
+
+/* Dark mode for navbar buttons */
+[data-theme="dark"] .navbar button {
+  background: #c0392b;
+}
+
+[data-theme="dark"] .navbar button:hover {
+  background: #a93226;
+}
+
+/* Top navbar (used in SavingsGoals, Profile, etc.) */
+.top-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem;
+}
+
+/* Dark mode for top navbar */
+[data-theme="dark"] .top-navbar {
+  background: var(--surface);
+  border-bottom-color: var(--border);
+}
+
+.top-navbar h2 {
+  color: var(--text-h);
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.top-navbar .nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.top-navbar .nav-links button {
+  padding: 0.5rem 1rem;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.top-navbar .nav-links button:hover {
+  background: var(--accent);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.top-navbar .nav-links button:active {
+  transform: translateY(0);
+}
+
+/* Dark mode for top navbar buttons */
+[data-theme="dark"] .top-navbar .nav-links button {
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+[data-theme="dark"] .top-navbar .nav-links button:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* Metrics cards */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  background: var(--surface);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* Dark mode for metric cards */
+[data-theme="dark"] .metric-card {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.metric-card h3 {
+  color: var(--text-h);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.metric-card p {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--text);
+}
+
+/* Recent transactions */
+.recent-transactions h3,
+.transaction-history h3 {
+  color: var(--text-h);
+  margin-bottom: 1rem;
+}
+
+.recent-transactions ul,
+.transaction-history ul {
+  list-style: none;
+}
+
+.recent-transactions li,
+.transaction-history li {
+  background: var(--surface);
+  margin-bottom: 0.75rem;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Dark mode for transaction items */
+[data-theme="dark"] .recent-transactions li,
+[data-theme="dark"] .transaction-history li {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.recent-transactions li.withdrawal {
+  border-left: 4px solid #e74c3c;
+}
+
+.recent-transactions li.deposit {
+  border-left: 4px solid #27ae60;
+}
+
+.transaction-content {
+  flex: 1;
+}
+
+.user-name {
+  font-weight: bold;
+  color: var(--text-h);
+}
+
+.amount {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.amount.positive {
+  color: #27ae60;
+}
+
+.amount.negative {
+  color: #e74c3c;
+}
+
+.description {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+/* Admin section */
+.admin-section {
+  background: var(--surface);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+/* Dark mode for admin section */
+[data-theme="dark"] .admin-section {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.admin-section h3 {
+  color: var(--text-h);
+  margin-bottom: 1rem;
+}
+
+/* Transaction form */
+.transaction-form {
+  background: var(--surface);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+/* Dark mode for transaction form */
+[data-theme="dark"] .transaction-form {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.transaction-form h3 {
+  color: var(--text-h);
+  margin-bottom: 1.5rem;
+}
+
+.transaction-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.transaction-form select,
+.transaction-form input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Dark mode form inputs */
+[data-theme="dark"] .transaction-form select,
+[data-theme="dark"] .transaction-form input {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.transaction-form button {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.transaction-form button:hover {
+  transform: translateY(-2px);
+}
+
+.transaction-form button:active {
+  transform: translateY(0);
+}
+
+/* Responsive dashboard */
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+  }
+  
+  .navbar {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .navbar button {
+    margin-top: 1rem;
+  }
+  
+  .metrics {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+/* Savings Goals Styles */
+.savings-goals {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.savings-goals h2 {
+  color: var(--text-h);
+  margin-bottom: 24px;
+}
+
+/* Form styles */
+.error {
+  background: #ffebee;
+  color: #c62828;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border-left: 4px solid #c62828;
+}
+
+/* Dark mode error */
+[data-theme="dark"] .error {
+  background: #4a1414;
+  color: #ff8a80;
+  border-left-color: #ff5252;
+}
+
+.goals-form {
+  background: var(--surface);
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 24px;
+}
+
+/* Dark mode goals form */
+[data-theme="dark"] .goals-form {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border: 1px solid var(--border);
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Dark mode form inputs */
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group select {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+}
+
+/* Dark mode focus */
+[data-theme="dark"] .form-group input:focus,
+[data-theme="dark"] .form-group select:focus {
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.3);
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.action-btn:active {
+  transform: translateY(0);
+}
+
+/* Dark mode action buttons */
+[data-theme="dark"] .action-btn {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] .action-btn:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.edit-btn {
+  background: var(--accent);
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #5a4dff;
+}
+
+.delete-btn {
+  background: #f44336;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #d32f2f;
+}
+
+/* Dark mode buttons */
+[data-theme="dark"] .edit-btn {
+  background: #5a67d8;
+}
+
+[data-theme="dark"] .edit-btn:hover {
+  background: #3a56d4;
+}
+
+[data-theme="dark"] .delete-btn {
+  background: #d32f2f;
+}
+
+[data-theme="dark"] .delete-btn:hover {
+  background: #b71c1c;
+}
+
+.goals-list {
+  background: var(--surface);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+/* Dark mode goals list */
+[data-theme="dark"] .goals-list {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border: 1px solid var(--border);
+}
+
+.goals-list h3 {
+  color: var(--text-h);
+  padding: 20px 24px;
+  margin: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.goals-grid {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+}
+
+.goal-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+/* Dark mode goal card */
+[data-theme="dark"] .goal-card {
+  background: var(--surface);
+}
+
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.goal-header h3 {
+  margin: 0 0 4px 0;
+  color: var(--text-h);
+  font-size: 1.1em;
+}
+
+.goal-category {
+  background: var(--accent-bg);
+  color: var(--accent);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+/* Dark mode goal category */
+[data-theme="dark"] .goal-category {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+.goal-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.progress-label {
+  font-weight: 500;
+  color: var(--text-h);
+  font-size: 0.9em;
+}
+
+/* Progress bar container - my custom classes */
+.progress-bar-container {
+  position: relative;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Dark mode progress bar bg */
+[data-theme="dark"] .progress-bar-container {
+  background: #424242;
+}
+
+.progress-bar-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+}
+
+.progress-bar-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* Dark mode progress text */
+[data-theme="dark"] .progress-text {
+  color: #ffffff;
+}
+
+.progress-details {
+  margin-top: 4px;
+  font-size: 0.9em;
+  color: var(--text);
+}
+
+.progress-details span {
+  font-weight: 500;
+}
+
+.goal-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  font-size: 0.9em;
+  color: var(--text);
+}
+
+.goal-detail {
+  display: flex;
+}
+
+.goal-detail span:first-child {
+  font-weight: 500;
+  color: var(--text-light);
+}
+
+.goal-detail span:last-child {
+  margin-left: 4px;
+  font-weight: 600;
+}
+
+.goal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.action-btn.edit-btn,
+.action-btn.delete-btn {
+  flex: 1;
+  justify-content: center;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-light);
+}
+
+/* Dark mode empty state */
+[data-theme="dark"] .empty-state {
+  color: var(--text-light);
+}
+
+.empty-state p {
+  margin: 8px 0;
+}
+
+.empty-state .hint {
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
+  
+  .form-group {
+    min-width: 100%;
+  }
+  
+  .goals-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .goal-card {
+    flex-direction: column;
+  }
+  
+  .goal-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .goal-actions {
+    flex-direction: column;
+  }
+  
+  .action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
