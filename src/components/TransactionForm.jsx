@@ -91,8 +91,8 @@ function TransactionForm({ onAddTransaction, currentUser, allProfiles = [], edit
       return;
     }
     
-    // Validate related user for loan types
-    const isLoanType = ['loan_received', 'loan_given', 'loan_repayment', 'loan_repayment_received'].includes(type);
+    // Moved isLoanType definition to component scope
+    // const isLoanType = ['loan_received', 'loan_given', 'loan_repayment', 'loan_repayment_received'].includes(type);
     if (isLoanType && !relatedUserId) {
         setError('Por favor, seleccione un usuario relacionado para la transacción de préstamo.');
         return;
@@ -270,6 +270,9 @@ function TransactionForm({ onAddTransaction, currentUser, allProfiles = [], edit
     setError('');
     setShowLoanSuggestion(false);
   };
+  
+  // Define isLoanType at the component level for both handleSubmit and JSX rendering
+  const isLoanType = ['loan_received', 'loan_given', 'loan_repayment', 'loan_repayment_received'].includes(type);
   
   return (
     <form onSubmit={handleSubmit} className="transaction-form">
