@@ -10,6 +10,6 @@ export default defineConfig({
   plugins: [react()],
   base: '/test-repo/',
   define: {
-    'process.env.APP_VERSION': JSON.stringify(packageJson.version),
+    'import.meta.env.VITE_APP_VERSION': JSON.stringify(packageJson.version),
   },
 })
