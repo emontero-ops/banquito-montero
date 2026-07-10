@@ -7,7 +7,7 @@ import Dashboard from './components/Dashboard.jsx';
 import Profile from './components/Profile';
 import SavingsGoals from './components/SavingsGoals.jsx';
 
-const APP_VERSION = "0.1.0";
+const APP_VERSION = process.env.APP_VERSION;
 
 function AppContent() {
   const [user, setUser] = useState(null);
