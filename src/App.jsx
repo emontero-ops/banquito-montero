@@ -49,21 +49,28 @@ function AppContent() {
 
   useEffect(() => {
     let active = true;
+    console.log('AppContent useEffect started. location.pathname:', location.pathname);
 
     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log('Auth event:', event);
-      
-      if (!active) return;
+      console.log('Auth event:', event, 'session:', session, 'active:', active, 'location.pathname:', location.pathname);
+
+      if (!active) {
+        console.log('Auth event ignored: component not active.');
+        return;
+      }
 
       try {
         if (session) {
+          console.log('Session found, loading profile...');
           await loadProfile(session.user);
         } else {
+          console.log('No session, setting user to null.');
           setUser(null);
         }
       } catch (error) {
-        console.error('Auth handler error:', error);
+        console.error('Auth handler error during session/profile load:', error);
       } finally {
+        console.log('Auth handler finally block. Setting initialized and loading to false.');
         if (active) {
           setInitialized(true);
           setLoading(false);
@@ -72,11 +79,15 @@ function AppContent() {
     });
 
     return () => {
+      console.log('AppContent cleanup. Setting active to false.');
       active = false;
       authListener.subscription.unsubscribe();
     };
   }, []);
 
+  const isLoginPage = location.pathname === '/';
+
+  // Show loading spinner while authenticating
   if (loading || !initialized) {
     return (
       <div className="flex h-screen items-center justify-center bg-[#0d0e12]">
@@ -88,17 +99,22 @@ function AppContent() {
     );
   }
 
-  const isAuthPage = location.pathname === '/';
-
-  // Protect routes: If not logged in and not on login page, redirect to login
-  if (!user && !isAuthPage) {
+  // After authentication/initialization:
+  // 1. If not logged in AND not on the login page, redirect to login.
+  if (!user && !isLoginPage) {
+    console.log('Redirecting to login: Not logged in and not on login page.');
     return <Navigate to="/" replace />;
   }
 
-  // If logged in and on login page, redirect to dashboard
-  if (user && isAuthPage) {
+  // 2. If logged in AND on the login page, redirect to dashboard. 
+  if (user && isLoginPage) {
+    console.log('Redirecting to dashboard: Logged in and on login page.');
     return <Navigate to="/dashboard" replace />;
   }
+
+  // 3. Otherwise (logged in and on a protected page, or not logged in and on login page),
+  //    let React Router handle the current path.
+  console.log('Rendering application content for path:', location.pathname);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
