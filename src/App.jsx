@@ -17,11 +17,19 @@ function AppContent() {
   const loadProfile = async (sessionUser) => {
     if (!sessionUser) return null;
     try {
-      const { data: userProfile, error } = await supabase
+      const fetchPromise = supabase
         .from('profiles')
         .select('*')
         .eq('id', sessionUser.id)
         .single();
+
+      // Wait at most 1500ms for the database response to avoid getting stuck on loading screen
+      const response = await Promise.race([
+        fetchPromise,
+        new Promise((_, reject) => setTimeout(() => reject(new Error('Profile fetch timeout')), 1500))
+      ]);
+
+      const { data: userProfile, error } = response;
 
       if (userProfile) {
         const fullUser = { ...sessionUser, role: userProfile.role, name: userProfile.name };
@@ -40,35 +48,33 @@ function AppContent() {
   };
 
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (session) {
-          await loadProfile(session.user);
-        }
-      } catch (error) {
-        console.error('Error checking session:', error);
-      } finally {
-        setInitialized(true);
-        setLoading(false);
-      }
-    };
-
-    checkAuth();
+    let active = true;
 
     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+      console.log('Auth event:', event);
+      
+      if (!active) return;
+
+      try {
         if (session) {
           await loadProfile(session.user);
+        } else {
+          setUser(null);
         }
-      } else if (event === 'SIGNED_OUT') {
-        setUser(null);
-        setInitialized(true);
-        setLoading(false);
+      } catch (error) {
+        console.error('Auth handler error:', error);
+      } finally {
+        if (active) {
+          setInitialized(true);
+          setLoading(false);
+        }
       }
     });
 
-    return () => authListener.subscription.unsubscribe();
+    return () => {
+      active = false;
+      authListener.subscription.unsubscribe();
+    };
   }, []);
 
   if (loading || !initialized) {
