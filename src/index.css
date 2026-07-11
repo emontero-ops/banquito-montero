@@ -1,80 +1,855 @@
 /*
- * Simple CSS for the Ahorros Familiares app
- * With CSS Variables for Light/Dark themes
+ * Premium CSS for Ahorros Familiares App
+ * Using OKLCH color system and premium typography
+ * Design Direction: Technical Minimalism with Artisanal Details
  */
 
-/* Reset and base styles */
+/* Import Premium Fonts - Using Google Fonts for development, consider self-hosting for production */
+@import url('https://fonts.googleapis.com/css2?family=Satoshi:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+/* Reset and base styles with premium touch */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* CSS Variables - Light Theme (default) */
+/* CSS Variables - Premium OKLCH Color System */
 :root {
-  --background: #ffffff;
-  --surface: #f5f5f5;
-  --border: #ddd;
-  --text: #333;
-  --text-h: #222;
-  --text-light: #777;
-  --accent: #667eea;
-  --accent-bg: rgba(102, 126, 234, 0.1);
-  --accent-border: #5a67d8;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Neutral Base - Cool Gray with warmth */
+  --background: oklch(0.96 0 0);
+  --surface: oklch(0.92 0 0);
+  --border: oklch(0.85 0 0);
+  --text: oklch(0.2 0 0);
+  --text-h: oklch(0.15 0 0);
+  --text-light: oklch(0.5 0 0);
+  
+  /* Premium Accent - Esmeralda suave (OKLCH) */
+  --accent: oklch(0.45 0.15 150);
+  --accent-bg: oklch(0.45 0.15 150 / 0.1);
+  --accent-border: oklch(0.4 0.12 150);
+  
+  /* Semantic Colors */
+  --success: oklch(0.3 0.2 140);
+  --warning: oklch(0.45 0.15 50);
+  --error: oklch(0.4 0.2 30);
+  
+  /* Elevation */
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.05);
+  --shadow: 0 4px 6px oklch(0 0 0 / 0.08);
+  --shadow-lg: 0 10px 15px oklch(0 0 0 / 0.1);
+  
+  /* Typography */
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.25, 0.1, 0.25, 1.0);
+  --transition: 200ms cubic-bezier(0.25, 0.1, 0.25, 1.0);
 }
 
-/* CSS Variables - Dark Theme */
+/* CSS Variables - Dark Theme (Premium Dark) */
 [data-theme="dark"] {
-  --background: #121212;
-  --surface: #1e1e1e;
-  --border: #333;
-  --text: #f0f0f0;
-  --text-h: #ffffff;
-  --text-light: #aaa;
-  --accent: #667eea;
-  --accent-bg: rgba(102, 126, 234, 0.2);
-  --accent-border: #5a67d8;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  /* Neutral Base - Rich Dark */
+  --background: oklch(0.12 0 0);
+  --surface: oklch(0.18 0 0);
+  --border: oklch(0.25 0 0);
+  --text: oklch(0.85 0 0);
+  --text-h: oklch(0.95 0 0);
+  --text-light: oklch(0.6 0 0);
+  
+  /* Premium Accent - Esmeralda suave adaptado para dark */
+  --accent: oklch(0.55 0.15 150);
+  --accent-bg: oklch(0.55 0.15 150 / 0.15);
+  --accent-border: oklch(0.5 0.12 150);
+  
+  /* Semantic Colors */
+  --success: oklch(0.4 0.2 140);
+  --warning: oklch(0.55 0.15 50);
+  --error: oklch(0.5 0.2 30);
+  
+  /* Elevation */
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.2);
+  --shadow: 0 4px 6px oklch(0 0 0 / 0.25);
+  --shadow-lg: 0 10px 15px oklch(0 0 0 / 0.3);
 }
 
 /* CSS Variables - Auto Theme (follows system) */
 [data-theme="auto"] {
-  --background: #ffffff;
-  --surface: #f5f5f5;
-  --border: #ddd;
-  --text: #333;
-  --text-h: #222;
-  --text-light: #777;
-  --accent: #667eea;
-  --accent-bg: rgba(102, 126, 234, 0.1);
-  --accent-border: #5a67d8;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --background: oklch(0.96 0 0);
+  --surface: oklch(0.92 0 0);
+  --border: oklch(0.85 0 0);
+  --text: oklch(0.2 0 0);
+  --text-h: oklch(0.15 0 0);
+  --text-light: oklch(0.5 0 0);
+  --accent: oklch(0.45 0.15 150);
+  --accent-bg: oklch(0.45 0.15 150 / 0.1);
+  --accent-border: oklch(0.4 0.12 150);
+  --success: oklch(0.3 0.2 140);
+  --warning: oklch(0.45 0.15 50);
+  --error: oklch(0.4 0.2 30);
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.05);
+  --shadow: 0 4px 6px oklch(0 0 0 / 0.08);
+  --shadow-lg: 0 10px 15px oklch(0 0 0 / 0.1);
 }
 
 /* Apply auto theme based on system preference */
 @media (prefers-color-scheme: dark) {
   [data-theme="auto"] {
-    --background: #121212;
-    --surface: #1e1e1e;
-    --border: #333;
-    --text: #f0f0f0;
-    --text-h: #ffffff;
-    --text-light: #aaa;
-    --accent: #667eea;
-    --accent-bg: rgba(102, 126, 234, 0.2);
-    --accent-border: #5a67d8;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --background: oklch(0.12 0 0);
+    --surface: oklch(0.18 0 0);
+    --border: oklch(0.25 0 0);
+    --text: oklch(0.85 0 0);
+    --text-h: oklch(0.95 0 0);
+    --text-light: oklch(0.6 0 0);
+    --accent: oklch(0.55 0.15 150);
+    --accent-bg: oklch(0.55 0.15 150 / 0.15);
+    --accent-border: oklch(0.5 0.12 150);
+    --success: oklch(0.4 0.2 140);
+    --warning: oklch(0.55 0.15 50);
+    --error: oklch(0.5 0.2 30);
+    --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.2);
+    --shadow: 0 4px 6px oklch(0 0 0 / 0.25);
+    --shadow-lg: 0 10px 15px oklch(0 0 0 / 0.3);
   }
 }
 
+/* Base Styles with Premium Typography */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: var(--font-sans);
   background-color: var(--background);
   color: var(--text);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
+
+/* Premium Typography Enhancements */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text-h);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  text-wrap: balance;
+}
+
+p, li, label, input, textarea, select, button {
+  text-wrap: pretty;
+}
+
+/* Container and Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* App layout */
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.app-header {
+  background: linear-gradient(135deg, var(--accent) 0%, oklch(0.4 0.12 150) 100%);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+.app-header h1 {
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.app-header p {
+  opacity: 0.9;
+  font-size: 1.1rem;
+}
+
+/* Login form */
+.login-container {
+  background: var(--surface);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto;
+  border: 1px solid var(--border);
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--text-h);
+  font-size: 1.75rem;
+}
+
+.login-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+.login-container input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: var(--background);
+  color: var(--text);
+  transition: var(--transition-fast);
+}
+
+.login-container input:focus {
+  outline: 2px solid var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.login-container button {
+  width: 100%;
+  padding: 1rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+
+.login-container button:hover {
+  background: oklch(0.4 0.12 150);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.login-container button:active {
+  transform: translateY(0);
+}
+
+.error {
+  background: var(--error-bg, oklch(0.4 0.2 30 / 0.1));
+  color: var(--error);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  border: 1px solid var(--error-bg, oklch(0.4 0.2 30 / 0.2));
+}
+
+/* Dark mode adjustments for error */
+[data-theme="dark"] .error {
+  background: var(--error-bg, oklch(0.5 0.2 30 / 0.2));
+  border-color: var(--error-bg, oklch(0.5 0.2 30 / 0.3));
+}
+
+/* Dashboard */
+.dashboard {
+  flex: 1;
+  display: flex;
+}
+
+/* Navbar */
+.navbar {
+  width: 250px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 2rem;
+  border-right: 1px solid var(--border);
+}
+
+.navbar h2 {
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.navbar button {
+  width: 100%;
+  padding: 1rem;
+  background: var(--error);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+
+.navbar button:hover {
+  background: oklch(0.35 0.18 30);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.navbar button:active {
+  transform: translateY(0);
+}
+
+/* Dark mode for navbar buttons */
+[data-theme="dark"] .navbar button {
+  background: var(--error);
+}
+
+[data-theme="dark"] .navbar button:hover {
+  background: oklch(0.45 0.18 30);
+}
+
+/* Top navbar (used in SavingsGoals, Profile, etc.) */
+.top-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem;
+}
+
+/* Dark mode for top navbar */
+[data-theme="dark"] .top-navbar {
+  background: var(--surface);
+  border-bottom-color: var(--border);
+}
+
+.top-navbar h2 {
+  color: var(--text-h);
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.top-navbar .nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.top-navbar .nav-links button {
+  padding: 0.5rem 1rem;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.top-navbar .nav-links button:hover {
+  background: var(--accent);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.top-navbar .nav-links button:active {
+  transform: translateY(0);
+}
+
+/* Dark mode for top navbar buttons */
+[data-theme="dark"] .top-navbar .nav-links button {
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+[data-theme="dark"] .top-navbar .nav-links button:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* Metrics cards */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  background: var(--surface);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: var(--transition);
+  border: 1px solid var(--border);
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  border-color: var(--accent);
+}
+
+/* Dark mode for metric cards */
+[data-theme="dark"] .metric-card {
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .metric-card:hover {
+  box-shadow: var(--shadow);
+}
+
+/* Metric card content */
+.metric-card h3 {
+  color: var(--text-h);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.metric-card p {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 0.5rem;
+}
+
+/* Recent transactions */
+.recent-transactions h3,
+.transaction-history h3 {
+  color: var(--text-h);
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.recent-transactions ul,
+.transaction-history ul {
+  list-style: none;
+}
+
+.recent-transactions li,
+.transaction-history li {
+  background: var(--surface);
+  margin-bottom: 0.75rem;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid var(--border);
+  transition: var(--transition-fast);
+}
+
+.recent-transactions li:hover,
+.transaction-history li:hover {
+  transform: translateX(2px);
+  box-shadow: var(--shadow);
+  border-color: var(--accent);
+}
+
+/* Dark mode for transaction items */
+[data-theme="dark"] .recent-transactions li,
+[data-theme="dark"] .transaction-history li {
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .recent-transactions li:hover,
+[data-theme="dark"] .transaction-history li:hover {
+  box-shadow: var(--shadow);
+}
+
+.recent-transactions li.withdrawal {
+  border-left: 3px solid var(--error);
+  padding-left: 0.75rem;
+}
+
+.recent-transactions li.deposit {
+  border-left: 3px solid var(--success);
+  padding-left: 0.75rem;
+}
+
+.transaction-content {
+  flex: 1;
+}
+
+.user-name {
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.amount {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.amount.positive {
+  color: var(--success);
+}
+
+.amount.negative {
+  color: var(--error);
+}
+
+.description {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+/* Admin section */
+.admin-section {
+  background: var(--surface);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+  border: 1px solid var(--border);
+}
+
+/* Dark mode for admin section */
+[data-theme="dark"] .admin-section {
+  box-shadow: var(--shadow-sm);
+}
+
+.admin-section h3 {
+  color: var(--text-h);
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+/* Transaction form */
+.transaction-form {
+  background: var(--surface);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+  border: 1px solid var(--border);
+}
+
+/* Dark mode for transaction form */
+[data-theme="dark"] .transaction-form {
+  box-shadow: var(--shadow-sm);
+}
+
+.transaction-form h3 {
+  color: var(--text-h);
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+}
+
+.transaction-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.transaction-form select,
+.transaction-form input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: var(--background);
+  color: var(--text);
+  transition: var(--transition-fast);
+}
+
+.transaction-form select:focus,
+.transaction-form input:focus {
+  outline: 2px solid var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+/* Dark mode form inputs */
+[data-theme="dark"] .transaction-form select,
+[data-theme="dark"] .transaction-form input {
+  background: var(--background);
+  color: var(--text);
+}
+
+/* Transaction form button */
+.transaction-form button {
+  width: 100%;
+  padding: 1rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 0.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.transaction-form button:hover {
+  background: oklch(0.4 0.12 150);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.transaction-form button:active {
+  transform: translateY(0);
+}
+
+/* Responsive dashboard */
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+  }
+  
+  .navbar {
+    width: 100%;
+    text-align: center;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .navbar button {
+    margin-top: 1rem;
+  }
+  
+  .metrics {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  
+  .main-content {
+    padding: 1rem;
+  }
+}
+
+/* Savings Goals Styles */
+.savings-goals {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.7 0 0);
+}
+
+/* Dark mode scrollbar */
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.3 0 0);
+}
+
+/* Button variants */
+.btn-secondary {
+  background: var(--accent-bg);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.btn-secondary:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-h);
+  border: 1px solid var(--border);
+}
+
+.btn-outline:hover {
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-success {
+  background: var(--success);
+  color: white;
+}
+
+.btn-success:hover {
+  background: oklch(0.25 0.18 140);
+}
+
+.btn-warning {
+  background: var(--warning);
+  color: white;
+}
+
+.btn-warning:hover {
+  background: oklch(0.4 0.12 50);
+}
+
+/* Card-based layout improvements */
+.card {
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .card {
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .card:hover {
+  box-shadow: var(--shadow);
+}
+
+.card-header {
+  background: var(--surface);
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Utility classes */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-5 { margin-top: 1.5rem; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-5 { margin-bottom: 1.5rem; }
+
+.ms-1 { margin-left: 0.25rem; }
+.ms-2 { margin-left: 0.5rem; }
+.ms-3 { margin-left: 0.75rem; }
+.ms-4 { margin-left: 1rem; }
+.ms-5 { margin-left: 1.5rem; }
+
+.me-1 { margin-right: 0.25rem; }
+.me-2 { margin-right: 0.5rem; }
+.me-3 { margin-right: 0.75rem; }
+.me-4 { margin-right: 1rem; }
+.me-5 { margin-right: 1.5rem; }
+
+.p-1 { padding: 0.25rem; }
+.p-2 { padding: 0.5rem; }
+.p-3 { padding: 0.75rem; }
+.p-4 { padding: 1rem; }
+.p-5 { padding: 1.5rem; }
+
+.fw-bold { font-weight: 600; }
+.fw-medium { font-weight: 500; }
+.fw-normal { font-weight: 400; }
+
+.fs-xs { font-size: 0.75rem; }
+.fs-sm { font-size: 0.875rem; }
+.fs-base { font-size: 1rem; }
+.fs-lg { font-size: 1.125rem; }
+.fs-xl { font-size: 1.25rem; }
+.fs-2xl { font-size: 1.5rem; }
+.fs-3xl { font-size: 1.875rem; }
+
+.text-primary { color: var(--accent); }
+.text-secondary { color: var(--text-h); }
+.text-muted { color: var(--text-light); }
+.text-success { color: var(--success); }
+.text-warning { color: var(--warning); }
+.text-error { color: var(--error); }
+
+.bg-primary { background-color: var(--accent); }
+.bg-secondary { background-color: var(--surface); }
+.bg-muted { background-color: var(--accent-bg); }
+
+.border { border: 1px solid var(--border); }
+.border-top { border-top: 1px solid var(--border); }
+.border-bottom { border-bottom: 1px solid var(--border); }
+.border-left { border-left: 1px solid var(--border); }
+.border-right { border-right: 1px solid var(--border); }
+
+.rounded { border-radius: 8px; }
+.rounded-lg { border-radius: 12px; }
+.rounded-full { border-radius: 9999px; }
+
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow { box-shadow: var(--shadow); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: 0.25rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+.gap-5 { gap: 1.5rem; }
+
+.grid { display: grid; }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.gap-4 { gap: 1rem; }
+
+.hidden { display: none; }
 
 /* Rest of the styles remain the same but use variables */
 .container {
