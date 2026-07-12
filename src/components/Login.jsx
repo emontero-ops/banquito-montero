@@ -54,7 +54,7 @@ function Login({ onLogin }) {
         password: password,
         options: {
           data: { name: username, role: role },
-          emailRedirectTo: 'https://emontero-ops.github.io/test-repo/',
+          emailRedirectTo: 'https://emontero-ops.github.io/banquito-montero/',
         },
       });
 
