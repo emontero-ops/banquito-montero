@@ -304,13 +304,15 @@ function Dashboard({ user, onLogout }) {
 
   return (
     <div className={`dashboard ${isMenuOpen ? 'menu-open' : ''}`}>
-      <nav className="navbar">
+      <div className="top-header">
         <div className="navbar-header">
-          <h2>Menú</h2>
           <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? '✕' : '☰'} 
           </button>
+          <h2>Banquito Montero</h2>
         </div>
+      </div>
+      <nav className="navbar">
         <div className="nav-links-container">
           <button onClick={onLogout}>Cerrar sesión</button>
           <button onClick={() => navigate('/profile')}>Mi Perfil</button>

@@ -172,6 +172,67 @@ p, li, label, input, textarea, select, button {
   font-size: 1.1rem;
 }
 
+/* Top Header for mobile menu toggle */
+.top-header {
+  display: none; /* Hidden by default */
+  justify-content: space-between;
+  align-items: center;
+  background: var(--surface);
+  color: var(--text);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border);
+  z-index: 1001; /* Above navbar */
+}
+
+.top-header .navbar-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.top-header .navbar-header h2 {
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+/* Show top header on mobile */
+@media (max-width: 768px) {
+  .top-header {
+    display: flex;
+  }
+}
+
+/* Menu toggle styles in top header */
+.top-header .menu-toggle {
+  display: block;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--text-h);
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.top-header .menu-toggle:hover {
+  color: var(--accent);
+}
+
+/* Dark mode for top header */
+[data-theme="dark"] .top-header {
+  background: var(--surface);
+  border-bottom-color: var(--border);
+}
+
+[data-theme="dark"] .top-header .menu-toggle {
+  color: var(--text-h);
+}
+
+[data-theme="dark"] .top-header .menu-toggle:hover {
+  color: var(--accent);
+}
+
 /* Login form */
 .login-container {
   background: var(--surface);
@@ -649,18 +710,6 @@ p, li, label, input, textarea, select, button {
     border-right: 1px solid var(--border);
     border-bottom: none;
     text-align: left;
-  }
-  
-  .navbar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    padding: 0 1rem;
-  }
-  
-  .navbar .menu-toggle {
-    display: block;
   }
   
   .dashboard.menu-open .navbar {
