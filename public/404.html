@@ -4,24 +4,28 @@
     <meta charset="utf-8">
     <title>Redirigiendo...</title>
     <script>
-      // Función para obtener la ruta base del repositorio
-      function getRepoBase() {
-        const path = window.location.pathname;
-        const parts = path.split('/');
-        // Asumiendo que el nombre del repositorio es el segundo segmento en la URL de GitHub Pages
-        // e.g., /test-repo/dashboard -> /test-repo
-        if (parts.length > 1 && parts[1] === 'test-repo') {
-          return '/' + parts[1] + '/';
-        }
-        return '/'; // Si no se encuentra el repositorio, asumimos la raíz
+      // Single Page Apps redirect for GitHub Pages
+      // Keeps the original subpath and query parameters by encoding them into the redirect URL
+      const path = window.location.pathname;
+      const search = window.location.search;
+      const hash = window.location.hash;
+      
+      const prefix = '/test-repo';
+      let relPath = path;
+      if (path.startsWith(prefix)) {
+        relPath = path.substring(prefix.length);
       }
-
-      // Redirigir a la base de la aplicación para que React Router tome el control
-      const base = getRepoBase();
-      window.location.replace(base);
+      
+      // Ensure relPath starts with a slash
+      if (!relPath.startsWith('/')) {
+        relPath = '/' + relPath;
+      }
+      
+      const redirectUrl = prefix + '/?p=' + encodeURIComponent(relPath) + '&q=' + encodeURIComponent(search) + hash;
+      window.location.replace(redirectUrl);
     </script>
   </head>
   <body>
-    <p>Si no eres redirigido automáticamente, haz clic <a href="#">aquí</a>.</p>
+    <p>Redirigiendo a la página solicitada...</p>
   </body>
 </html>
