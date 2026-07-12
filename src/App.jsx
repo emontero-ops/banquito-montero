@@ -123,7 +123,7 @@ function AppContent() {
   return (
     <div className="App">
       <div style={{ position: 'fixed', bottom: '10px', right: '10px', fontSize: '12px', color: '#888', zIndex: 9999 }}>
-        v{import.meta.env.VITE_APP_VERSION || '1.5.0'}
+        Banquito Montero v{import.meta.env.VITE_APP_VERSION || '1.5.0'}
       </div>
       <Routes>
         <Route path="/" element={<Login onLogin={(sessionUser) => {
@@ -160,7 +160,7 @@ function AppContent() {
 
 function App() {
   return (
-    <Router basename={import.meta.env.PROD ? '/test-repo' : ''}>
+    <Router basename={import.meta.env.PROD ? '/banquito-montero' : ''}>
       <AppContent />
     </Router>
   );

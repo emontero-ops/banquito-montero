@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuestas de Logo V3 - Banquito Montero</title>
+    <style>
+        :root {
+            --bg-color: #0d0d0f;
+            --surface-color: #16161a;
+            --text-color: #f3f4f6;
+            --accent-gold: #d4af37;
+        }
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Segoe UI', sans-serif; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; width: 100%; max-width: 1100px; }
+        .card { background-color: var(--surface-color); border-radius: 16px; padding: 30px; display: flex; flex-direction: column; align-items: center; }
+        .logo-box { width: 180px; height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px; }
+        .badge { background: rgba(212, 175, 55, 0.1); color: var(--accent-gold); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <h1>Banquito Montero</h1>
+    <div class="grid">
+        <!-- OPCIÓN A: Fusión Bóveda + Banquito -->
+        <div class="card">
+            <span class="badge">OPCIÓN A (REIMAGINADA)</span>
+            <div class="logo-box">
+                <svg width="150" height="150" viewBox="0 0 150 150" fill="none">
+                    <!-- Banquito legs -->
+                    <path d="M40 120V90L75 105L110 90V120" stroke="#f3f4f6" stroke-width="8" stroke-linecap="round"/>
+                    <!-- Vault door body -->
+                    <circle cx="75" cy="70" r="45" stroke="#d4af37" stroke-width="6"/>
+                    <!-- Safe dial -->
+                    <circle cx="75" cy="70" r="15" stroke="#d4af37" stroke-width="4"/>
+                    <line x1="75" y1="55" x2="75" y2="60" stroke="#d4af37" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <h2>Sólido Montero</h2>
+            <p>La esencia: un banquito de ahorro que es a la vez una caja fuerte. Minimalismo y seguridad.</p>
+        </div>
+        <!-- OPCIÓN B: Nueva propuesta (Monograma M estilizado) -->
+        <div class="card">
+            <span class="badge">OPCIÓN B (NUEVA PROPUESTA)</span>
+            <div class="logo-box">
+                <svg width="150" height="150" viewBox="0 0 150 150" fill="none">
+                    <path d="M30 110V40L75 70L120 40V110" stroke="#d4af37" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+                    <circle cx="75" cy="40" r="15" fill="#f3f4f6"/>
+                </svg>
+            </div>
+            <h2>Nexus Montero</h2>
+            <p>Una 'M' que se transforma en un refugio (techo) para el ahorro. Elegante y corporativo.</p>
+        </div>
+        <!-- OPCIÓN C: El Chanchito (Mantenido) -->
+        <div class="card">
+            <span class="badge">OPCIÓN C</span>
+            <div class="logo-box">
+                <svg width="150" height="150" viewBox="0 0 150 150" fill="none">
+                    <path d="M75 110C105 110 130 85 130 55C130 35 115 25 75 25C35 25 20 35 20 55C20 85 45 110 75 110Z" stroke="#f3f4f6" stroke-width="6"/>
+                    <rect x="70" y="5" width="10" height="30" rx="5" fill="#d4af37"/>
+                    <circle cx="75" cy="65" r="15" stroke="#d4af37" stroke-width="4"/>
+                </svg>
+            </div>
+            <h2>Chanchito de Seguridad</h2>
+        </div>
+    </div>
+</body>
+</html>

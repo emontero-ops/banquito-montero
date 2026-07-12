@@ -79,86 +79,72 @@ function Login({ onLogin }) {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-background p-6">
-      <div className="w-full max-w-xs space-y-6">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-text-h">{isRegistering ? 'Crear cuenta' : 'Iniciar sesión'}</h1>
-          <p className="text-text-light">Accede a tu cuenta de Ahorros Familiares</p>
+    <div className="App">
+      <div className="login-container">
+        <div className="login-header">
+          <h2>{isRegistering ? 'Crear cuenta' : 'Iniciar sesión'}</h2>
+          <p>Accede a tu cuenta de Ahorros Familiares</p>
         </div>
         
         {error && (
-          <div className="rounded-lg border border-error/20 bg-error/10 px-4 py-3 text-sm text-error text-error">
+          <div className="error">
             {error}
           </div>
         )}
         
         {message && (
-          <div className="rounded-lg border border-success/20 bg-success/10 px-4 py-3 text-sm text-success text-success">
+          <div className="success">
             {message}
           </div>
         )}
         
-        <form className="space-y-4" onSubmit={isRegistering ? handleRegisterSubmit : handleLoginSubmit}>
+        <form className="login-form" onSubmit={isRegistering ? handleRegisterSubmit : handleLoginSubmit}>
           {isRegistering && (
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-text-h">Nombre:</label>
+            <div className="form-group">
+              <label htmlFor="username">Nombre:</label>
               <input 
                 type="text" 
+                id="username"
                 value={username} 
                 onChange={(e) => setUsername(e.target.value)} 
                 required
-                className="block w-full rounded-lg border border-input bg-background px-3 py-2 text-text placeholder-text-light/50 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
+                className="form-input"
               />
             </div>
           )}
           
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-text-h">Email:</label>
+          <div className="form-group">
+            <label htmlFor="email">Email:</label>
             <input 
               type="email" 
+              id="email"
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
               required
-              className="block w-full rounded-lg border border-input bg-background px-3 py-2 text-text placeholder-text-light/50 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
+              className="form-input"
             />
           </div>
           
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-text-h">Contraseña:</label>
+          <div className="form-group">
+            <label htmlFor="password">Contraseña:</label>
             <input 
               type="password" 
+              id="password"
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
               required
-              className="block w-full rounded-lg border border-input bg-background px-3 py-2 text-text placeholder-text-light/50 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
+              className="form-input"
             />
           </div>
           
-          {isRegistering && (
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-text-h">Rol:</label>
-              <select 
-                value={role} 
-                onChange={(e) => setRole(e.target.value)}
-                className="block w-full rounded-lg border border-input bg-background px-3 py-2 text-text placeholder-text-light/50 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
-              >
-                <option value="member">Miembro</option>
-                <option value="admin">Admin</option>
-              </select>
-            </div>
-          )}
-          
-          <button 
-            type="submit"
-            className="w-full rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
+          <button type="submit" className="btn-primary">
             {isRegistering ? 'Crear cuenta' : 'Iniciar sesión'}
           </button>
         </form>
         
         <button 
           onClick={() => setIsRegistering(!isRegistering)}
-          className="w-full rounded-lg border border-input px-4 py-2 text-sm font-semibold text-text-h hover:bg-accent/10 hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 transition-colors"
+          className="btn-secondary"
         >
           {isRegistering ? '¿Ya tienes cuenta? Inicia sesión' : '¿No tienes cuenta? Regístrate'}
         </button>
