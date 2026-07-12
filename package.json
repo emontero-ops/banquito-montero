@@ -1,5 +1,5 @@
 {
-  "name": "test-repo",
+  "name": "banquito-montero",
   "private": true,
   "version": "1.5.0",
   "type": "module",
@@ -36,9 +36,9 @@
     "globals": "^17.5.0",
     "vite": "^8.0.10"
   },
-  "homepage": "https://emontero-ops.github.io/test-repo",
+  "homepage": "https://emontero-ops.github.io/banquito-montero",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/emontero-ops/test-repo.git"
+    "url": "git+https://github.com/emontero-ops/banquito-montero.git"
   }
 }
