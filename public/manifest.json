@@ -1,19 +1,19 @@
 {
-  "name": "Ahorros Familiares",
-  "short_name": "Ahorros",
-  "description": "Aplicación para gestionar el ahorro familiar en común",
+  "name": "Banquito Montero",
+  "short_name": "Banquito",
+  "description": "Gestión inteligente de ahorros familiares",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#0d0e12",
+  "theme_color": "#d4af37",
   "icons": [
     {
-      "src": "icons.svg",
+      "src": "logo.svg",
       "sizes": "192x192",
       "type": "image/svg+xml"
     },
     {
-      "src": "icons.svg",
+      "src": "logo.svg",
       "sizes": "512x512",
       "type": "image/svg+xml"
     }
