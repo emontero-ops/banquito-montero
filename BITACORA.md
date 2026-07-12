@@ -80,17 +80,14 @@ Registra todos los movimientos financieros familiares.
     *   *Carga Defensiva:* Se implementó un timeout de `1500ms` en la consulta del perfil en Supabase para evitar bloqueos infinitos de carga ante caídas de red o demoras del servidor.
 
 ### Fase 4: Rediseño Premium del Componente de Login
-*   **Actualización del Componente `Login.jsx`:**
-    *   Se actualizó el diseño del componente de login para que se alinee con la estética de "Minimalismo Técnico Premium" de la aplicación.
-    *   Se utilizó un contenedor con fondo oscuro (`--background`) y bordes redondeados.
-    *   Los campos de entrada (`input`) y selects fueron estilizados con un borde sutil (`--border`), fondo de superficie (`--background`), texto claro (`--text`) y enfoque en color de acento (`--accent`).
-    *   Los botones fueron diseñados con un estilo premium:
-        *   El botón principal (Iniciar/Crear cuenta) usa un gradiente de color de acento a un tono púrpura (`linear-gradient(135deg, var(--accent) 0%, #764ba2 100%)`) con efecto hover y press.
-        *   El botón secundario (alternar entre login y registro) usa un estilo de contorno que se rellena al hover.
-    *   Se mejoró la tipografía y el espaciado para una composición limpia y legible, utilizando las variables de tamaño y peso de fuente definidas en `index.css`.
-    *   Se mantuvo la lógica de autenticación y registro con Supabase, así como el manejo de estados de carga, error y mensaje.
-|*   **Despliegue:** Los cambios fueron compilados y desplegados en GitHub Pages mediante `npm run build` y `npm run deploy`.
-|*   **Seguridad:** Se eliminó la opción pública de registro como "admin" en el formulario de creación de cuenta para evitar accesos no autorizados. Ahora todos los nuevos usuarios se registran por defecto con el rol "member". Los roles de administrador deben ser asignados manualmente por un administrador existente directamente en la base de datos de Supabase.
+### Fase 5: Branding y PWA (Banquito Montero)
+*   **Renombramiento:** Cambio de identidad de la aplicación a "**Banquito Montero**" y nombre corto "**Banquito**".
+*   **Actualización PWA:**
+    *   Reconfiguración exhaustiva de `manifest.json` para reflejar el nuevo nombre y asegurar compatibilidad con dispositivos móviles.
+    *   Actualización del `sw.js` para limpiar cachés antiguas y servir los nuevos metadatos de forma limpia.
+    *   Resolución del problema de nombres antiguos en Chrome móvil: Se confirmó que requiere una desinstalación y reinstalación de la PWA por parte del usuario para que el sistema operativo purgue el nombre antiguo guardado en el índice de aplicaciones instaladas.
+*   **Despliegue:** Construcción, validación de manifest y despliegue final en `emontero-ops.github.io/banquito-montero/` con éxito.
+
 
 ---
 

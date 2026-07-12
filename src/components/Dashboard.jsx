@@ -9,6 +9,7 @@ function Dashboard({ user, onLogout }) {
   const [transactions, setTransactions] = useState([]);
   const [editingTransactionId, setEditingTransactionId] = useState(null);
   const [allProfiles, setAllProfiles] = useState([]); // Nuevo estado para todos los perfiles
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para controlar la visibilidad del menú
   const navigate = useNavigate();
 
   // Process transaction with automatic debt payment logic
@@ -302,10 +303,15 @@ function Dashboard({ user, onLogout }) {
   );
 
   return (
-    <div className="dashboard">
+    <div className={`dashboard ${isMenuOpen ? 'menu-open' : ''}`}>
       <nav className="navbar">
-        <h2>Menú</h2>
-        <div className="nav-links">
+        <div className="navbar-header">
+          <h2>Menú</h2>
+          <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? '✕' : '☰'} 
+          </button>
+        </div>
+        <div className="nav-links-container">
           <button onClick={onLogout}>Cerrar sesión</button>
           <button onClick={() => navigate('/profile')}>Mi Perfil</button>
           <button onClick={() => navigate('/goals')}>Metas</button>
