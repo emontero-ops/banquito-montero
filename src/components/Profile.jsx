@@ -4,9 +4,10 @@ import { supabase } from '../supabaseClient'; // Importa supabase
 import HeaderNav from './HeaderNav'; // Importa el nuevo componente HeaderNav
 
 function Profile({ user, onLogout }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const [profileData, setProfileData] = useState({
-    name: '',
+  // ... rest of state
+
     email: '',
     phone: '',
     birthDate: '',
@@ -75,8 +76,8 @@ function Profile({ user, onLogout }) {
   };
 
   return (
-    <div className="profile-page">
-      <HeaderNav user={user} onLogout={onLogout} />
+    <div className={`profile-page ${isMenuOpen ? 'menu-open' : ''}`}>
+      <HeaderNav user={user} onLogout={onLogout} onMenuToggle={(isOpen) => setIsMenuOpen(isOpen)} />
 
       {error && <div className="error">{error}</div>}
       {success && <div className="success">{success}</div>}

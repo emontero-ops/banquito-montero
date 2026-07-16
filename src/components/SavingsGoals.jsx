@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import HeaderNav from './HeaderNav'; // Importa el nuevo componente HeaderNav
+import HeaderNav from './HeaderNav';
 
 function SavingsGoals({ user, onLogout }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const [goals, setGoals] = useState([]);
-  const [newGoal, setNewGoal] = useState({
+  // ... rest of state
+
     name: '',
     targetAmount: '',
     currentAmount: '',
@@ -103,8 +104,8 @@ function SavingsGoals({ user, onLogout }) {
   };
 
   return (
-    <div className="savings-goals-page">
-      <HeaderNav user={user} onLogout={onLogout} />
+    <div className={`savings-goals-page ${isMenuOpen ? 'menu-open' : ''}`}>
+      <HeaderNav user={user} onLogout={onLogout} onMenuToggle={(isOpen) => setIsMenuOpen(isOpen)} />
       {error && <div className="error">{error}</div>}
 
       <form onSubmit={handleSubmit} className="goals-form">

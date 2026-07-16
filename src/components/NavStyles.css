@@ -64,15 +64,21 @@
   z-index: 1000;
   padding: 1rem;
   box-shadow: var(--shadow);
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(-100%);
 }
 
 .navbar.open {
   display: block;
+  transform: translateX(0);
 }
 
 /* Update dashboard to react to menu state */
-.dashboard.menu-open .navbar {
+.dashboard.menu-open .navbar,
+.savings-goals-page.menu-open .navbar,
+.profile-page.menu-open .navbar {
   display: block;
+  transform: translateX(0);
 }
 
 /* Navbar button styles */
