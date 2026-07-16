@@ -5,8 +5,7 @@ import HeaderNav from './HeaderNav';
 function SavingsGoals({ user, onLogout }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-  // ... rest of state
-
+  const [newGoal, setNewGoal] = useState({
     name: '',
     targetAmount: '',
     currentAmount: '',

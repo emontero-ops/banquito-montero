@@ -6,8 +6,8 @@ import HeaderNav from './HeaderNav'; // Importa el nuevo componente HeaderNav
 function Profile({ user, onLogout }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-  // ... rest of state
-
+  const [profileData, setProfileData] = useState({
+    name: '',
     email: '',
     phone: '',
     birthDate: '',
