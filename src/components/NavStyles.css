@@ -70,6 +70,11 @@
   display: block;
 }
 
+/* Update dashboard to react to menu state */
+.dashboard.menu-open .navbar {
+  display: block;
+}
+
 /* Navbar button styles */
 .navbar button {
   width: 100%;
