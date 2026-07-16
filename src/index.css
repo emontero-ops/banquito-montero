@@ -329,9 +329,25 @@ p, li, label, input, textarea, select, button {
   color: var(--text);
   padding: 2rem;
   border-right: 1px solid var(--border);
-  z-index: 1000; /* Asegura que el menú esté por encima de otros contenidos */
+  z-index: 1000;
   transition: transform 0.3s ease-in-out;
+  /* Hide by default on mobile, show when menu is open */
+  display: none;
 }
+
+/* Show navbar on desktop */
+@media (min-width: 769px) {
+  .navbar {
+    display: block;
+  }
+}
+
+/* Show navbar when menu is open (on mobile) */
+.dashboard.menu-open .navbar {
+  display: block;
+}
+
+/* Hide navbar when menu is closed (on mobile) - already handled by display: none above */
 
 .navbar-header {
   display: flex;

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import HeaderNav from './HeaderNav'; // Importa el nuevo componente HeaderNav
 
-function SavingsGoals() {
+function SavingsGoals({ user, onLogout }) {
   const navigate = useNavigate();
   const [goals, setGoals] = useState([]);
   const [newGoal, setNewGoal] = useState({
@@ -102,16 +103,8 @@ function SavingsGoals() {
   };
 
   return (
-    <div className="savings-goals">
-      <div className="navbar">
-        <h2>Metas de Ahorro</h2>
-        <div className="nav-links">
-          <button onClick={() => navigate(-1)}>← Volver</button>
-          <button onClick={() => navigate('/profile')}>Mi Perfil</button>
-          <button onClick={() => navigate('/')}>Dashboard</button>
-        </div>
-      </div>
-
+    <div className="savings-goals-page">
+      <HeaderNav user={user} onLogout={onLogout} />
       {error && <div className="error">{error}</div>}
 
       <form onSubmit={handleSubmit} className="goals-form">

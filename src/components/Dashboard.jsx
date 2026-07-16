@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import TransactionForm from './TransactionForm';
 import SavingsDisplay from './SavingsDisplay';
 import TransactionHistory from './TransactionHistory';
+import HeaderNav from './HeaderNav'; // Importa el nuevo componente HeaderNav
 import { supabase } from '../supabaseClient'; // Importa supabase
 
 function Dashboard({ user, onLogout }) {
   const [transactions, setTransactions] = useState([]);
   const [editingTransactionId, setEditingTransactionId] = useState(null);
   const [allProfiles, setAllProfiles] = useState([]); // Nuevo estado para todos los perfiles
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para controlar la visibilidad del menú
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para el menú móvil
   const navigate = useNavigate();
 
   // Process transaction with automatic debt payment logic
@@ -303,22 +304,8 @@ function Dashboard({ user, onLogout }) {
   );
 
   return (
-    <div className={`dashboard ${isMenuOpen ? 'menu-open' : ''}`}>
-      <div className="top-header">
-        <div className="navbar-header">
-          <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? '✕' : '☰'} 
-          </button>
-          <h2>Banquito Montero</h2>
-        </div>
-      </div>
-      <nav className="navbar">
-        <div className="nav-links-container">
-          <button onClick={onLogout}>Cerrar sesión</button>
-          <button onClick={() => navigate('/profile')}>Mi Perfil</button>
-          <button onClick={() => navigate('/goals')}>Metas</button>
-        </div>
-      </nav>
+    <div className="dashboard">
+      <HeaderNav user={user} onLogout={onLogout} onMenuToggle={(isOpen) => setIsMenuOpen(isOpen)} />
 
       <main className="main-content">
         <SavingsDisplay

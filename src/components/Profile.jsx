@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient'; // Importa supabase
+import HeaderNav from './HeaderNav'; // Importa el nuevo componente HeaderNav
 
-function Profile({ user }) {
+function Profile({ user, onLogout }) {
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState({
     name: '',
@@ -75,14 +76,7 @@ function Profile({ user }) {
 
   return (
     <div className="profile-page">
-      <div className="top-navbar">
-        <h2>Mi Perfil</h2>
-        <div className="nav-links">
-          <button onClick={() => navigate(-1)}>← Volver</button>
-          <button onClick={() => navigate('/dashboard')}>Dashboard</button>
-          <button onClick={() => navigate('/goals')}>Metas</button>
-        </div>
-      </div>
+      <HeaderNav user={user} onLogout={onLogout} />
 
       {error && <div className="error">{error}</div>}
       {success && <div className="success">{success}</div>}

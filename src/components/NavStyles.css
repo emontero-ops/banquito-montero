@@ -1,0 +1,153 @@
+/* HeaderNav Component Styles */
+.top-header {
+  display: none; /* Hidden by default on desktop */
+  justify-content: space-between;
+  align-items: center;
+  background: var(--surface);
+  color: var(--text);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border);
+  z-index: 1001; /* Above navbar */
+}
+
+/* Show top header on mobile */
+@media (max-width: 768px) {
+  .top-header {
+    display: flex;
+  }
+}
+
+.menu-toggle {
+  display: block;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--text-h);
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.menu-toggle:hover {
+  color: var(--accent);
+}
+
+[data-theme="dark"] .menu-toggle {
+  color: var(--text-h);
+}
+
+[data-theme="dark"] .menu-toggle:hover {
+  color: var(--accent);
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: none; /* Will be shown via JS */
+}
+
+/* Navbar styles */
+.navbar {
+  display: none;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background: var(--surface);
+  z-index: 1000;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.navbar.open {
+  display: block;
+}
+
+/* Navbar button styles */
+.navbar button {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+}
+
+.navbar button:hover {
+  background: var(--accent-bg);
+  color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.navbar button:active {
+  transform: translateY(0);
+}
+
+/* Dark mode for navbar buttons */
+[data-theme="dark"] .navbar button {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .navbar button:hover {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+/* Logout button specific styles */
+.navbar .logout-button {
+  background: var(--error);
+  color: white;
+  border: none;
+}
+
+.navbar .logout-button:hover {
+  background: oklch(0.35 0.18 30);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.navbar .logout-button:active {
+  transform: translateY(0);
+}
+
+[data-theme="dark"] .navbar .logout-button {
+  background: var(--error);
+  color: white;
+}
+
+[data-theme="dark"] .navbar .logout-button:hover {
+  background: oklch(0.45 0.18 30);
+  color: white;
+}
+
+/* Ensure dashboard content adjusts when navbar is open on mobile */
+.dashboard.menu-open .main-content {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  transition: margin 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+@media (min-width: 769px) {
+  .dashboard.menu-open .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+}
